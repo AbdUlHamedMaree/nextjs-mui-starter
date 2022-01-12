@@ -6,7 +6,9 @@ export const MainLayout: React.FC = ({ children }) => {
   return (
     <>
       <MainHeader />
-      <Box component='main'>{children}</Box>
+      <Box component='main' sx={{ flex: '1 0 auto' }}>
+        {children}
+      </Box>
       <MainFooter />
     </>
   );
