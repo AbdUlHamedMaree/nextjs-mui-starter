@@ -1,6 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+module.exports = {
+  distDir: (process.env.DIST_DIR || 'dist').trim(),
   reactStrictMode: true,
-}
-
-module.exports = nextConfig
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  webpack5: true,
+  optimizeFonts: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+};
