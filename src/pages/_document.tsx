@@ -2,26 +2,20 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { createEmotionCache } from '$ui/cache';
 import { theme } from '$ui/theme';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import React from 'react';
 
-type ExtraDocumentProps = {
-  emotionStyleTags: JSX.Element[];
-};
-
-export default class MyDocument extends Document<ExtraDocumentProps> {
+export default class MyDocument extends Document {
   render() {
     return (
       <Html lang='en' dir='ltr'>
         <Head>
           <meta name='theme-color' content={theme.palette.primary.main} />
-          <link rel='shortcut icon' href='/assets/images/logo/favicon.ico' />
           <link
             rel='stylesheet'
             href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
           />
-
-          {this.props.emotionStyleTags}
         </Head>
-        <body style={{ overflowX: 'hidden', maxWidth: 2000, margin: '0 auto' }}>
+        <body>
           <Main />
           <NextScript />
         </body>
@@ -57,6 +51,6 @@ MyDocument.getInitialProps = async ctx => {
 
   return {
     ...initialProps,
-    emotionStyleTags,
+    styles: [...React.Children.toArray(initialProps.styles), ...emotionStyleTags],
   };
 };

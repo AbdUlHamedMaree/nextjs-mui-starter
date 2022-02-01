@@ -1,8 +1,32 @@
 # Nextjs & Mui & Prettier & Analytics
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
+
+- Generate certificates
+
+  1. first run this command:
+
+     ```sh
+     openssl req -x509 -out localhost.crt -keyout localhost.key \
+       -days 365 \
+       -newkey rsa:2048 -nodes -sha256 \
+       -subj '/CN=localhost' -extensions EXT -config <( \
+       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+     ```
+
+  2. then copy `localhost.crt` and `localhost.key` to `certificates` directory (create the directory first).
+
+- Generate the `next-auth` secret key
+
+  1. first run this command:
+
+     ```sh
+     openssl rand -base64 32
+     ```
+
+  2. copy the command result (the key) and past it into your `.env`.
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 

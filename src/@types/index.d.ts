@@ -7,3 +7,20 @@ declare module '@mui/material/useMediaQuery' {
     options?: Options
   ): boolean;
 }
+
+declare module 'next' {
+  export type NextPage<P = {}, IP = P> = NextComponentType<NextPageContext, IP, P> & {
+    layout?: React.ComponentType;
+    auth?: AuthGuardProps;
+  };
+}
+
+declare module 'next-auth' {
+  /**
+   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+   */
+  interface Session {
+    user: any;
+    accessToken: string;
+  }
+}
