@@ -15,10 +15,13 @@ declare module 'next' {
   };
 }
 
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    query?: Record<string, string | number | boolean | undefined | null>;
+  }
+}
+
 declare module 'next-auth' {
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
   interface Session {
     user: any;
     accessToken: string;

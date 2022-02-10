@@ -2,19 +2,33 @@
 
 ## Getting Started
 
+- Environment variables
+
+  1. create `.env.local` file in the project root by running this command:
+
+     ```sh
+     cp .env.example .env.local
+     ```
+
+  2. replace/fill the environment variables in `.env.local` with its values.
+
 - Generate certificates
 
   1. first run this command:
 
      ```sh
-     openssl req -x509 -out localhost.crt -keyout localhost.key \
+     mkdir certificates \
+     && \
+     cd certificates \
+     && \
+     openssl req -x509 -out domain.crt -keyout domain.key \
        -days 365 \
        -newkey rsa:2048 -nodes -sha256 \
        -subj '/CN=localhost' -extensions EXT -config <( \
-       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth") \
+     && \
+     cd ..
      ```
-
-  2. then copy `localhost.crt` and `localhost.key` to `certificates` directory (create the directory first).
 
 - Generate the `next-auth` secret key
 
@@ -24,7 +38,9 @@
      openssl rand -base64 32
      ```
 
-  2. copy the command result (the key) and past it into your `.env`.
+  2. copy the command result (the key) and past it into your `.env.local`.
+
+---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

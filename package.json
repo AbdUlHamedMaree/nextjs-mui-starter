@@ -2,7 +2,7 @@
   "name": "nextjs-mui-starter",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node server.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "yarn format && yarn type-check && yarn lint:es",
@@ -31,6 +31,7 @@
     "@types/node": "17.0.8",
     "@types/nprogress": "^0.2.0",
     "@types/react": "17.0.38",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
     "eslint-config-prettier": "^8.3.0",
